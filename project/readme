@@ -1,0 +1,48 @@
+
+Title   :  Predicting Airbnb Rental Prices
+
+Problem Motivation and Background   :
+● Airbnb is market rental place for short term rentals, allowing host to list their entire or part of living space for others to rent.
+● As users continue to grow on both the supply and demand side, homeowners may find it hard to properly price their property.
+● With any service, trying to monitor and understand the underlying pricing dynamics of the Airbnb is very important both for hosts and guests.
+● Multiple factors influence the price of room in Airbnb like location, type of room, basic amenities the host is providing etc.
+● With better price suggestion estimates, Airbnb home providers can reach an equilibrium price that optimizes profit and affordability.
+● To accurately predict Airbnb room price, we aim to collect data which can give us insight on different features which directly impacts the rental price. We got the data from Inside Airbnb.
+
+Problem Statement   :
+● One challenge that Airbnb hosts face is to determine optimal rent price. If hosts try to charge above market price then renters will select more affordable alternatives. If price is set too low, hosts will miss out on potential revenue.
+● How much do the factors like location, property type, amenities and number of bedrooms etc influence the price of Airbnb room.
+● We have modelled this as regression problem.
+
+Data Source    :
+Link :  http://insideairbnb.com/get-the-data.html
+
+Target Variable   : Price of room (new listing) added to Airbnb. 
+
+Model Implemented :
+● Here, we want to predict exact price of Airbnb rental instead of any binary category, hence we are using a regression model.
+● The dataset contained different type of attributes such as categorical, boolean, text, numeric etc. After cleaning and preprocessing the data, all the attributes were converted to categorical attributes.
+● We implemented following models :
+
+  1. Decision Tree Regressor : In case of Decision Tree Regressor Model we can have a more general method to cover data. Also outlier data and overfitting can be handled effectively by pruning methods.
+     To improve the model performance we implemented : 1. Random Forest Regressor (Bagging)
+  2. XGBoost Regressor (Boosting)
+  
+Evaluation Approach :
+● Root Mean Square Error (RMSE) is used as the evaluation metric for our model.
+● We performed 5-fold cross validation and obtained following results :
+
+1. Model Performance for Decision Tree Regressor:
+● Average Mean Squared Error (MSE) over all 5 folds : 1631.06049802
+● Average Mean Absolute Error (MAE) over all 5 folds : 16.6865719082
+
+2. Model Performance for Random Forest Regressor:
+● Average Mean Squared Error (MSE) over all 5 folds : 1491.17524873
+● Average Mean Absolute Error (MAE) over all 5 folds : 15.5503871208
+
+3. Model Performance for XGBoost Regressor:
+● Average Mean Absolute Error (MAE) over all 5 folds : 1354.60882587
+● Average Mean Absolute Error (MAE) over all 5 folds : 14.6822331313
+
+Assumptions/Limitations :
+● The “transit” attribute in our dataset described what are the means of communication available to reach a particular Airbnb location. We assumed that if we can get the total count of means of communication, that could be a good feature for our model. We therefore, derived a new column transit_count by applying nltk Noun extraction, Stemming and Lemmatization on the “transit” column.
